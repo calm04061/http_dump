@@ -1,0 +1,11 @@
+POST http://recite.gray.perfectlingo.com/plan/update
+Host: 47.94.218.252
+Content-Type: application/x-www-form-urlencoded
+X-Eng-Auth: dt%3D2%26osv%3D15.6.1%26dk%3DiPhone10%252C3%26av%3D1666096485%26u%3D62110605%26r%3D26d762a9b82549e78f93ef69f6793720%26token%3DeL%252BEOJWI7X2vKYrZ3kkAr/AaoZsI7Dg32rY5Bau2LmE%253D%26ts%3D1668685417333%26sign%3D1%26d%3D1%26avn%3D3.1.0
+Accept: */*
+User-Agent: Ai-English/3.1.0 (iOS; iPhone X; 15.6.1; zh-Hans-CN)
+Accept-Language: zh-Hans-CN;q=1, en-CN;q=0.9
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+ab_model=1&ab_model_range=1&belong_id=32&belong_type=1&daily_count=10&description=%E6%9D%A5%E8%87%AA%E7%BE%8E%E5%9B%BD%E5%BD%93%E4%BB%A3%E8%AF%AD%E6%96%99%E5%BA%93%EF%BC%88COCA%EF%BC%89%E5%85%A8%E6%9D%A5%E6%BA%90%E7%BB%9F%E8%AE%A1%E8%AF%8D%E9%A2%91%E6%8E%92%E5%BA%8F%E7%AC%AC5001-10000%E8%AF%8D%EF%BC%8C%E7%BB%BC%E5%90%88%E6%8F%90%E5%8D%87%E8%8B%B1%E8%AF%AD%E5%AE%9E%E5%8A%9B%E5%BF%85%E5%A4%87%EF%BC%8C%E5%8E%BB%E9%87%8D%E5%A4%84%E7%90%86%E5%90%8E%EF%BC%8C%E9%BB%98%E8%AE%A4%E6%8C%89%E8%AF%8D%E9%A2%91%E9%99%8D%E5%BA%8F%E6%8E%92%E5%BA%8F%E3%80%82&isPlaceholderPlan=0&is_current=1&learnt_count=0&name=COCA%E8%AF%8D%E9%A2%915001-10000&order_type=5&plan_id=15105&status=3&tagId=4&thumbnail=https%3A//wanciwangdata-oss.perfectlingo.com/resources/word-book-cover/20201231_32.png&version=1&word_count=4770
