@@ -11,10 +11,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
+import java.net.URI;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static com.calm.proxy.ProxyHandler.*;
 import static com.calm.proxy.ProxyHandler.UID_KEY;
@@ -63,7 +65,9 @@ public class AfterConnectionListener implements ChannelFutureListener {
                     channel.attr(UID_KEY).set(u.get(0));
                 }
             }
-
+            URI uri1 = URI.create(uri);
+            String rawQuery = Optional.of(uri1).map(URI::getRawQuery).map(e -> "?" + e).orElse("");
+            request.setUri(uri1.getPath() + rawQuery);
             //转发请求到目标服务器
             channel.writeAndFlush(request).addListener(new AfterRequestCloseListener(ctx));
         } else {

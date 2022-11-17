@@ -3,13 +3,16 @@ package com.calm.proxy.proxy;
 import com.calm.proxy.ProxyHandler;
 import com.calm.proxy.handler.DumpCreatePlanHandler;
 import com.calm.proxy.listener.AfterConnectionListener;
+import com.calm.proxy.recode.HandlerRecode;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.*;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -18,7 +21,8 @@ import java.util.Map;
 
 public class DumpCreatePlanProxyHandler implements ProxyHandler {
     Logger LOGGER = org.slf4j.LoggerFactory.getLogger(DumpCreatePlanProxyHandler.class);
-
+    @Resource
+    private ObjectProvider<HandlerRecode> handlerRecodes;
     @Override
     public boolean isSupport(FullHttpRequest request) {
         String path = URI.create(request.uri()).getPath();
@@ -45,7 +49,7 @@ public class DumpCreatePlanProxyHandler implements ProxyHandler {
         String uri = request.uri();
         HttpMethod method = request.method();
         //创建客户端连接目标机器
-        ChannelFuture channelFuture = connectToRemote(ctx, URI.create(request.uri()).getHost(), 80, 10000, new DumpCreatePlanHandler());
+        ChannelFuture channelFuture = connectToRemote(ctx, URI.create(request.uri()).getHost(), 80, 10000, new DumpCreatePlanHandler(handlerRecodes));
         channelFuture.addListener(new AfterConnectionListener(ctx, request, headers, method, uri, requestBody));
     }
 

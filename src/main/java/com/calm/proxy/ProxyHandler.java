@@ -6,11 +6,14 @@ import io.netty.channel.*;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.http.*;
+import io.netty.handler.proxy.HttpProxyHandler;
 import io.netty.util.AttributeKey;
 import io.netty.util.CharsetUtil;
 import io.netty.util.ReferenceCountUtil;
 import org.springframework.util.StringUtils;
 
+import java.net.InetSocketAddress;
+import java.net.InterfaceAddress;
 import java.net.URI;
 import java.net.URLDecoder;
 import java.util.*;
@@ -25,7 +28,7 @@ public interface ProxyHandler {
     AttributeKey<String> REQUEST_URI_KEY = AttributeKey.valueOf("REQUEST_URI_KEY");
 
     AttributeKey<HttpMethod> REQUEST_METHOD_KEY = AttributeKey.valueOf("REQUEST_METHOD_KEY");
-    String UID = "123456";
+    String UID = "1234561";
     String AUTH_HEADER = "X-Eng-Auth";
 
     boolean isSupport(FullHttpRequest request);
@@ -52,6 +55,8 @@ public interface ProxyHandler {
             @Override
             protected void initChannel(SocketChannel socketChannel) {
                 ChannelPipeline pipeline = socketChannel.pipeline();
+                InetSocketAddress inetSocketAddress =new InetSocketAddress("127.0.0.1",8888);
+                pipeline.addLast(new HttpProxyHandler(inetSocketAddress));
                 //增加http编码器
                 pipeline.addLast(ChannelHandlerDefine.HTTP_CLIENT_CODEC, new HttpClientCodec());
 
