@@ -70,6 +70,10 @@ public interface ProxyHandler {
                         ChannelPipeline pipeline = socketChannel.pipeline();
                         //增加http编码器
                         pipeline.addLast(ChannelHandlerDefine.HTTP_CLIENT_CODEC, new HttpClientCodec());
+
+                        pipeline.addLast(new HttpContentDecompressor());
+                        pipeline.addLast(new HttpObjectAggregator(1024 * 1024 * 1024));
+
                         //增加一个传输数据的通道
                         for (ChannelInboundHandlerAdapter adapter:next){
                             pipeline.addLast(adapter);

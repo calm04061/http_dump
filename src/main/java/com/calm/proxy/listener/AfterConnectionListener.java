@@ -29,6 +29,7 @@ public class AfterConnectionListener implements ChannelFutureListener{
             //发送消息到目标服务器
             //关闭长连接
             headers.set(HttpHeaderNames.CONNECTION, "close");
+            headers.set(HttpHeaderNames.HOST, "recite.gray.perfectlingo.com");
 
             //转发请求到目标服务器
             channelFuture.channel().writeAndFlush(request).addListener(new AfterRequestCloseListener(ctx));
