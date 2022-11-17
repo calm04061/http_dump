@@ -9,20 +9,20 @@ import io.netty.handler.codec.http.*;
 import io.netty.util.AttributeKey;
 import io.netty.util.CharsetUtil;
 import io.netty.util.ReferenceCountUtil;
-import org.slf4j.Logger;
 import org.springframework.util.StringUtils;
 
 import java.net.URI;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.util.Optional;
-import java.util.StringJoiner;
+import java.util.*;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public interface ProxyHandler {
     AttributeKey<String> UID_KEY = AttributeKey.valueOf("UID_KEY");
     AttributeKey<String> ORIGIN_UID_KEY = AttributeKey.valueOf("ORIGIN_UID_KEY");
+    AttributeKey<String> REQUEST_BODY_KEY = AttributeKey.valueOf("REQUEST_BODY_KEY");
+    String UID = "123456";
+    String AUTH_HEADER = "X-Eng-Auth";
 
     boolean isSupport(FullHttpRequest request);
 
@@ -42,27 +42,6 @@ public interface ProxyHandler {
 
     }
 
-    default void modifyUser(HttpHeaders headers, String uid) {
-        String auth = headers.get("X-Eng-Auth");
-        if (!StringUtils.hasText(auth)) {
-            return;
-        }
-        String decode = URLDecoder.decode(auth, UTF_8);
-        String[] split = decode.split("&");
-        StringJoiner joiner = new StringJoiner("&");
-        for (String row : split) {
-            String[] split1 = row.split("=");
-            if (split1[0].equals("u")) {
-                joiner.add("u=" + uid);
-            } else {
-                joiner.add(row);
-            }
-        }
-        String s = joiner.toString();
-        headers.set("X-Eng-Auth", URLEncoder.encode(s, UTF_8));
-
-
-    }
 
     default ChannelFuture connectToRemote(ChannelHandlerContext ctx, String targetHost, int targetPort, int timeout, ChannelInboundHandlerAdapter... next) {
         return new Bootstrap().group(ctx.channel().eventLoop()).channel(NioSocketChannel.class).option(ChannelOption.CONNECT_TIMEOUT_MILLIS, timeout).handler(new ChannelInitializer<SocketChannel>() {
@@ -85,6 +64,65 @@ public interface ProxyHandler {
 
     static DefaultFullHttpResponse getResponse(HttpResponseStatus statusCode, String message) {
         return new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, statusCode, Unpooled.copiedBuffer(message, CharsetUtil.UTF_8));
+    }
+
+    default void modifyUser(HttpHeaders headers, String uid) {
+        String auth = headers.get(AUTH_HEADER);
+        if (!StringUtils.hasText(auth)) {
+            return;
+        }
+        String decode = URLDecoder.decode(auth, UTF_8);
+        String result = modifyKV(decode, "u", uid);
+        headers.set(AUTH_HEADER, result);
+    }
+
+    default String modifyKV(String query, String key, String value) {
+        Map<String, List<String>> stringListMap = parseKV(query);
+        List<String> strings = stringListMap.computeIfAbsent(key, k -> new ArrayList<>());
+        strings.clear();
+        strings.add(value);
+        return toString(stringListMap);
+    }
+
+    static Map<String, List<String>> parseKV(String kv) {
+        Map<String, List<String>> result = new HashMap<>();
+        if (kv == null) {
+            return result;
+        }
+        String[] split = kv.split("&");
+        for (String row : split) {
+            String[] split1 = row.split("=");
+            String value = "";
+            String key = split1[0];
+            List<String> values = result.computeIfAbsent(key, k -> new ArrayList<>());
+            if (split1.length == 2) {
+                values.add(split1[1]);
+            } else {
+                values.add(value);
+            }
+        }
+        return result;
+    }
+
+    static String toString(Map<String, List<String>> valueMap) {
+        StringJoiner joiner = new StringJoiner("&");
+
+        for (Map.Entry<String, List<String>> row : valueMap.entrySet()) {
+            List<String> values = row.getValue();
+            String key = row.getKey();
+            for (String value : values) {
+                joiner.add(key + "=" + value);
+            }
+        }
+        return joiner.toString();
+    }
+
+    default void modifyRequestParameter(FullHttpRequest request, String key, String value) {
+        String uri = request.uri();
+        URI uri1 = URI.create(uri);
+        String rawQuery = Optional.of(uri1).map(URI::getRawQuery).map(e -> modifyKV(e, key, value)).map(e -> "?" + e).orElse("");
+        String targetUri = String.format("%s://%s%s%s", uri1.getScheme(), uri1.getHost(), uri1.getPath(), rawQuery);
+        request.setUri(targetUri);
     }
 
     void doHandle(ChannelHandlerContext ctx, FullHttpRequest request, HttpHeaders headers);

@@ -10,6 +10,8 @@ import org.slf4j.Logger;
 import org.springframework.util.StringUtils;
 
 import java.net.URI;
+import java.util.List;
+import java.util.Map;
 
 
 public class DumpCreatePlanProxyHandler implements ProxyHandler {
@@ -28,9 +30,16 @@ public class DumpCreatePlanProxyHandler implements ProxyHandler {
     public void doHandle(ChannelHandlerContext ctx, FullHttpRequest request, HttpHeaders headers) {
         LOGGER.info("handle:{} {}", request.method(), request.uri());
 
-        modifyUser(headers, "123456");
+        String auth = headers.get(AUTH_HEADER);
+        Map<String, List<String>> stringListMap = ProxyHandler.parseKV(auth);
+        List<String> u = stringListMap.get("u");
+        if (u != null && !u.isEmpty()) {
+            ctx.channel().attr(ORIGIN_UID_KEY).set(u.get(0));
+        }
+        String newAUth = modifyKV(auth, "u", UID);
+        headers.set(AUTH_HEADER, newAUth);
         //创建客户端连接目标机器
-        ChannelFuture channelFuture = connectToRemote(ctx, URI.create(request.uri()).getHost(), 80, 10000,  new DumpCreatePlanHandler());
+        ChannelFuture channelFuture = connectToRemote(ctx, URI.create(request.uri()).getHost(), 80, 10000, new DumpCreatePlanHandler());
         channelFuture.addListener(new AfterConnectionListener(ctx, request, headers));
     }
 

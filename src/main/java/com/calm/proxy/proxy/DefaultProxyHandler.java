@@ -22,7 +22,7 @@ public class DefaultProxyHandler implements ProxyHandler, Ordered {
 
     @Override
     public void doHandle(ChannelHandlerContext ctx, FullHttpRequest request, HttpHeaders headers) {
-        String s = headers.get("X-Eng-Auth");
+        String s = headers.get(AUTH_HEADER);
         LOGGER.info("X-Eng-Auth:{}", s);
         //创建客户端连接目标机器
         ChannelFuture channelFuture = connectToRemote(ctx, URI.create(request.uri()).getHost(), 80, 10000, new RecordDataTransHandler(ctx.channel(), request.uri(), request.method()));
