@@ -7,7 +7,7 @@ import io.netty.handler.codec.http.FullHttpResponse;
 
 import java.nio.charset.StandardCharsets;
 
-public class EmptyHandler extends SimpleChannelInboundHandler<FullHttpResponse> {
+public class DumpCreatePlanHandler extends SimpleChannelInboundHandler<FullHttpResponse> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, FullHttpResponse msg) {

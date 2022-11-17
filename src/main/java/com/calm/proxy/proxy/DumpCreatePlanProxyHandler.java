@@ -1,17 +1,19 @@
 package com.calm.proxy.proxy;
 
 import com.calm.proxy.ProxyHandler;
-import com.calm.proxy.handler.EmptyHandler;
+import com.calm.proxy.handler.DumpCreatePlanHandler;
 import com.calm.proxy.listener.AfterConnectionListener;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.*;
+import org.slf4j.Logger;
 import org.springframework.util.StringUtils;
 
 import java.net.URI;
 
 
 public class DumpCreatePlanProxyHandler implements ProxyHandler {
+    Logger LOGGER = org.slf4j.LoggerFactory.getLogger(DumpCreatePlanProxyHandler.class);
 
     @Override
     public boolean isSupport(FullHttpRequest request) {
@@ -28,7 +30,7 @@ public class DumpCreatePlanProxyHandler implements ProxyHandler {
 
         modifyUser(headers, "123456");
         //创建客户端连接目标机器
-        ChannelFuture channelFuture = connectToRemote(ctx, URI.create(request.uri()).getHost(), 80, 10000,  new EmptyHandler());
+        ChannelFuture channelFuture = connectToRemote(ctx, URI.create(request.uri()).getHost(), 80, 10000,  new DumpCreatePlanHandler());
         channelFuture.addListener(new AfterConnectionListener(ctx, request, headers));
     }
 

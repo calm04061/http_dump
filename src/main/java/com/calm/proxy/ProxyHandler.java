@@ -6,6 +6,7 @@ import io.netty.channel.*;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.http.*;
+import io.netty.util.AttributeKey;
 import io.netty.util.CharsetUtil;
 import io.netty.util.ReferenceCountUtil;
 import org.slf4j.Logger;
@@ -20,7 +21,9 @@ import java.util.StringJoiner;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public interface ProxyHandler {
-    Logger LOGGER = org.slf4j.LoggerFactory.getLogger(ProxyHandler.class);
+    AttributeKey<String> UID_KEY = AttributeKey.valueOf("UID_KEY");
+    AttributeKey<String> ORIGIN_UID_KEY = AttributeKey.valueOf("ORIGIN_UID_KEY");
+
     boolean isSupport(FullHttpRequest request);
 
     default void handle(ChannelHandlerContext ctx, FullHttpRequest request) {
@@ -60,28 +63,26 @@ public interface ProxyHandler {
 
 
     }
+
     default ChannelFuture connectToRemote(ChannelHandlerContext ctx, String targetHost, int targetPort, int timeout, ChannelInboundHandlerAdapter... next) {
-        return new Bootstrap().group(ctx.channel().eventLoop())
-                .channel(NioSocketChannel.class)
-                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, timeout)
-                .handler(new ChannelInitializer<SocketChannel>() {
-                    @Override
-                    protected void initChannel(SocketChannel socketChannel) {
-                        ChannelPipeline pipeline = socketChannel.pipeline();
-                        //增加http编码器
-                        pipeline.addLast(ChannelHandlerDefine.HTTP_CLIENT_CODEC, new HttpClientCodec());
+        return new Bootstrap().group(ctx.channel().eventLoop()).channel(NioSocketChannel.class).option(ChannelOption.CONNECT_TIMEOUT_MILLIS, timeout).handler(new ChannelInitializer<SocketChannel>() {
+            @Override
+            protected void initChannel(SocketChannel socketChannel) {
+                ChannelPipeline pipeline = socketChannel.pipeline();
+                //增加http编码器
+                pipeline.addLast(ChannelHandlerDefine.HTTP_CLIENT_CODEC, new HttpClientCodec());
 
-                        pipeline.addLast(new HttpContentDecompressor());
-                        pipeline.addLast(new HttpObjectAggregator(1024 * 1024 * 1024));
+                pipeline.addLast(new HttpContentDecompressor());
+                pipeline.addLast(new HttpObjectAggregator(1024 * 1024 * 1024));
 
-                        //增加一个传输数据的通道
-                        for (ChannelInboundHandlerAdapter adapter:next){
-                            pipeline.addLast(adapter);
-                        }
-                    }
-                })
-                .connect(targetHost, targetPort);
+                //增加一个传输数据的通道
+                for (ChannelInboundHandlerAdapter adapter : next) {
+                    pipeline.addLast(adapter);
+                }
+            }
+        }).connect(targetHost, targetPort);
     }
+
     static DefaultFullHttpResponse getResponse(HttpResponseStatus statusCode, String message) {
         return new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, statusCode, Unpooled.copiedBuffer(message, CharsetUtil.UTF_8));
     }
