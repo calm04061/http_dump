@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface UserPlanInfoRepository extends JpaRepository<UserPlanInfo, Long> {
     Optional<UserPlanInfo> getUserPlanInfoByUid(String uid);
 
-    Optional<UserPlanInfo> getUserPlanInfoByUidAndBelongIdAndBelongType(String uid, Long belongType, String belongId);
+    Optional<UserPlanInfo> getUserPlanInfoByUidAndBelongIdAndBelongType(String uid, String belongId, Long belongType);
 
     Optional<UserPlanInfo> getUserPlanInfoByPlanId(String planId);
 }

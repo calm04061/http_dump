@@ -21,6 +21,10 @@ public interface ProxyHandler {
     AttributeKey<String> UID_KEY = AttributeKey.valueOf("UID_KEY");
     AttributeKey<String> ORIGIN_UID_KEY = AttributeKey.valueOf("ORIGIN_UID_KEY");
     AttributeKey<String> REQUEST_BODY_KEY = AttributeKey.valueOf("REQUEST_BODY_KEY");
+
+    AttributeKey<String> REQUEST_URI_KEY = AttributeKey.valueOf("REQUEST_URI_KEY");
+
+    AttributeKey<HttpMethod> REQUEST_METHOD_KEY = AttributeKey.valueOf("REQUEST_METHOD_KEY");
     String UID = "123456";
     String AUTH_HEADER = "X-Eng-Auth";
 

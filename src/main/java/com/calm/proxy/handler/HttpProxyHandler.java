@@ -24,12 +24,13 @@ public class HttpProxyHandler extends SimpleChannelInboundHandler<FullHttpReques
     protected void channelRead0(ChannelHandlerContext ctx, FullHttpRequest request) {
         List<ProxyHandler> collect = handlerObjectProvider.stream().collect(Collectors.toList());
         String auth = request.headers().get(AUTH_HEADER);
+        Channel channel = ctx.channel();
         String requestBody = request.content().toString(StandardCharsets.UTF_8);
-        ctx.channel().attr(REQUEST_BODY_KEY).set(requestBody);
+        channel.attr(REQUEST_BODY_KEY).set(requestBody);
         Map<String, List<String>> stringListMap = ProxyHandler.parseKV(auth);
         List<String> u = stringListMap.get("u");
         if (u != null && !u.isEmpty()) {
-            ctx.channel().attr(UID_KEY).set(u.get(0));
+            channel.attr(UID_KEY).set(u.get(0));
         }
         for (ProxyHandler handler:collect){
             FullHttpRequest copy = request.copy();

@@ -7,6 +7,8 @@ import io.netty.handler.codec.http.FullHttpResponse;
 
 import java.nio.charset.StandardCharsets;
 
+import static com.calm.proxy.ProxyHandler.UID_KEY;
+
 public class DumpCreatePlanHandler extends SimpleChannelInboundHandler<FullHttpResponse> {
 
     @Override
@@ -15,7 +17,8 @@ public class DumpCreatePlanHandler extends SimpleChannelInboundHandler<FullHttpR
         msg.headers().add("test1111","from proxy");
         ByteBuf content = msg.content();
         String s = content.toString(StandardCharsets.UTF_8);
-
+        String s1 = ctx.channel().attr(UID_KEY).get();
+        System.out.println(s1);
         System.out.println(s);
 //        clientChannel.writeAndFlush(msg);
     }

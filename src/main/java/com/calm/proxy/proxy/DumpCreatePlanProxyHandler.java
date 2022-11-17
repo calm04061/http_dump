@@ -3,6 +3,7 @@ package com.calm.proxy.proxy;
 import com.calm.proxy.ProxyHandler;
 import com.calm.proxy.handler.DumpCreatePlanHandler;
 import com.calm.proxy.listener.AfterConnectionListener;
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.*;
@@ -10,6 +11,7 @@ import org.slf4j.Logger;
 import org.springframework.util.StringUtils;
 
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
@@ -38,9 +40,13 @@ public class DumpCreatePlanProxyHandler implements ProxyHandler {
         }
         String newAUth = modifyKV(auth, "u", UID);
         headers.set(AUTH_HEADER, newAUth);
+        ByteBuf content = request.content();
+        String requestBody = content.toString(StandardCharsets.UTF_8);
+        String uri = request.uri();
+        HttpMethod method = request.method();
         //创建客户端连接目标机器
         ChannelFuture channelFuture = connectToRemote(ctx, URI.create(request.uri()).getHost(), 80, 10000, new DumpCreatePlanHandler());
-        channelFuture.addListener(new AfterConnectionListener(ctx, request, headers));
+        channelFuture.addListener(new AfterConnectionListener(ctx, request, headers, method, uri, requestBody));
     }
 
 
