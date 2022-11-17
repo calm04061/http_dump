@@ -39,7 +39,7 @@ public class DumpCreatePlanProxyHandler implements ProxyHandler {
         System.out.println(s);
         modifyUser(headers, "123456");
         //创建客户端连接目标机器
-        connectToRemote(ctx, URI.create(request.uri()), 10000, new HttpContentDecompressor(), new HttpObjectAggregator(1000 * 1024 * 1024), new CreatePlanHandler(planInfoRepository)).addListener(new AfterConnectionListener(ctx, request, headers));
+        ProxyHandler.connectToRemote(ctx, URI.create(request.uri()), 10000, new HttpContentDecompressor(), new HttpObjectAggregator(1000 * 1024 * 1024), new CreatePlanHandler(planInfoRepository)).addListener(new AfterConnectionListener(ctx, request, headers));
     }
 
 }

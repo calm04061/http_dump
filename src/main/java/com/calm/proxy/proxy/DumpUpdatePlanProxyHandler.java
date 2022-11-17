@@ -19,7 +19,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
-@Component
+//@Component
 public class DumpUpdatePlanProxyHandler implements ProxyHandler {
     private final UserPlanInfoRepository planInfoRepository;
 
@@ -50,7 +50,9 @@ public class DumpUpdatePlanProxyHandler implements ProxyHandler {
 //        content.writeCharSequence(body, StandardCharsets.UTF_8);
 //        request.replace(content);
         //创建客户端连接目标机器
-        connectToRemote(ctx, URI.create(request.uri()), 10000, new HttpContentDecompressor(), new HttpObjectAggregator(1000 * 1024 * 1024), new UpdatePlanHandler(planInfoRepository, ctx.channel())).addListener(new AfterConnectionListener(ctx, request, headers));
+        ProxyHandler.connectToRemote(ctx, URI.create(request.uri()), 10000,
+//                new HttpContentDecompressor(),
+                new HttpObjectAggregator(1000 * 1024 * 1024), new UpdatePlanHandler(planInfoRepository, ctx.channel())).addListener(new AfterConnectionListener(ctx, request, headers));
     }
 
 }

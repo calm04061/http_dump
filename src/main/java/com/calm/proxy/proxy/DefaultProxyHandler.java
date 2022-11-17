@@ -40,7 +40,7 @@ public class DefaultProxyHandler implements ProxyHandler, Ordered {
     @Override
     public void doHandle(ChannelHandlerContext ctx, FullHttpRequest request, HttpHeaders headers) {
         //创建客户端连接目标机器
-        connectToRemote(ctx, URI.create(request.uri()), 10000, new HttpContentDecompressor(), new HttpObjectAggregator(1000 * 1024 * 1024), new DefaultProxyDataHandler(planInfoRepository, request, ctx.channel())).addListener(new AfterConnectionListener(ctx, request, headers));
+        ProxyHandler.connectToRemote(ctx, URI.create(request.uri()), 10000, new HttpContentDecompressor(), new HttpObjectAggregator(1000 * 1024 * 1024), new DefaultProxyDataHandler(planInfoRepository, request, ctx.channel())).addListener(new AfterConnectionListener(ctx, request, headers));
     }
 
     @Override

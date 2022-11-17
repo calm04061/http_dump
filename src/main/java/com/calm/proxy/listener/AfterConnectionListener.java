@@ -44,6 +44,7 @@ public class AfterConnectionListener implements ChannelFutureListener {
             String query = Optional.of(uri).map(URI::getRawQuery).map(e -> "?" + e).orElse("");
             request.setUri(uri.getPath() + query);
             channelFuture.channel().writeAndFlush(request).addListener(new AfterRequestCloseListener(ctx));
+//            LOGGER.info("[{}]count:{}", request.hashCode(), request.refCnt());
         } else {
             ReferenceCountUtil.retain(request);
             ctx.writeAndFlush(getResponse(HttpResponseStatus.BAD_REQUEST, "代理服务连接远程服务失败")).addListener(ChannelFutureListener.CLOSE);

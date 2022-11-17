@@ -7,7 +7,6 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.FullHttpResponse;
-import io.netty.util.ReferenceCountUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,13 +25,13 @@ public class UpdatePlanHandler extends SimpleChannelInboundHandler<FullHttpRespo
 
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, FullHttpResponse msg) {
+    protected void channelRead0(ChannelHandlerContext ctx, FullHttpResponse response) {
+        LOGGER.info("type:{},[{}]count:{}", response.getClass(),response.hashCode(), response.refCnt());
         String uid = ctx.channel().attr(ProxyHandler.PLAN_ID_ATTR_KAY).get();
         Optional<UserPlanInfo> userPlanInfoByUid = planInfoRepository.getUserPlanInfoByPlanId(uid);
         if (userPlanInfoByUid.isPresent()) {
             UserPlanInfo planInfo = userPlanInfoByUid.get();
             planInfo.setStatus(3);
         }
-//        ReferenceCountUtil.release(msg);
     }
 }

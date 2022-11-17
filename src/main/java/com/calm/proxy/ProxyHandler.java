@@ -110,7 +110,7 @@ public interface ProxyHandler {
         String targetUri = String.format("%s://%s%s%s", uri1.getScheme(), uri1.getHost(), uri1.getPath(), rawQuery);
         request.setUri(targetUri);
     }
-    default ChannelFuture connectToRemote(ChannelHandlerContext ctx, URI url, int timeout, ChannelInboundHandlerAdapter... next) {
+    static ChannelFuture connectToRemote(ChannelHandlerContext ctx, URI url, int timeout, ChannelInboundHandlerAdapter... next) {
         String host = url.getHost();
         int port = 80;
 

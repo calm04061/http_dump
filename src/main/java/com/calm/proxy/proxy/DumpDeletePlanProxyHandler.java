@@ -38,7 +38,7 @@ public class DumpDeletePlanProxyHandler implements ProxyHandler {
         modifyUser(headers, UID);
         modifyRequestParameter(request, "plan_id", planInfoRepository.getUserPlanInfoByUid(UID).map(UserPlanInfo::getPlanId).orElse(""));
         //创建客户端连接目标机器
-        connectToRemote(ctx, URI.create(request.uri()), 10000, new HttpContentDecompressor(), new HttpObjectAggregator(1000 * 1024 * 1024), new DeletePlanHandler(planInfoRepository, ctx.channel())).addListener(new AfterConnectionListener(ctx, request, headers));
+        ProxyHandler.connectToRemote(ctx, URI.create(request.uri()), 10000, new HttpContentDecompressor(), new HttpObjectAggregator(1000 * 1024 * 1024), new DeletePlanHandler(planInfoRepository, ctx.channel())).addListener(new AfterConnectionListener(ctx, request, headers));
     }
 
 }

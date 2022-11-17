@@ -2,6 +2,7 @@ package com.calm.proxy;
 
 
 import com.calm.proxy.handler.CalmHttpProxyHandler;
+import com.calm.proxy.repository.UserPlanInfoRepository;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -26,6 +27,9 @@ public class ProxyApplication implements CommandLineRunner {
     private final Logger LOGGER = LoggerFactory.getLogger(ProxyApplication.class);
     @Resource
     private ObjectProvider<ProxyHandler> handlerObjectProvider;
+    @Resource
+    private UserPlanInfoRepository planInfoRepository;
+
     public static void main(String[] args) {
         SpringApplication.run(ProxyApplication.class, args);
     }
@@ -45,7 +49,7 @@ public class ProxyApplication implements CommandLineRunner {
                 pipeline.addLast(ChannelHandlerDefine.HTTP_CODEC, new HttpServerCodec());
                 pipeline.addLast(ChannelHandlerDefine.HTTP_AGGREGATOR, new HttpObjectAggregator(100 * 1024 * 1024));
                 //Http代理服务
-                pipeline.addLast(ChannelHandlerDefine.HTTP_PROXY, new CalmHttpProxyHandler(handlerObjectProvider));
+                pipeline.addLast(ChannelHandlerDefine.HTTP_PROXY, new CalmHttpProxyHandler(planInfoRepository, handlerObjectProvider));
             }
         });
         ChannelFuture bindFuture = serverBootstrap.bind(port).sync();

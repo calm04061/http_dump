@@ -14,6 +14,8 @@ import org.slf4j.LoggerFactory;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
+import static com.calm.proxy.ProxyHandler.LOGGER;
+
 public class CreatePlanHandler extends SimpleChannelInboundHandler<FullHttpResponse> {
     private final Logger LOGGER = LoggerFactory.getLogger(CreatePlanHandler.class);
 
@@ -30,8 +32,12 @@ public class CreatePlanHandler extends SimpleChannelInboundHandler<FullHttpRespo
 //    }
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, FullHttpResponse msg) {
-        ByteBuf content = msg.content();
+    protected void channelRead0(ChannelHandlerContext ctx, FullHttpResponse response) {
+        LOGGER.info("[{}]count:{}", response.hashCode(), response.refCnt());
+        ByteBuf content = response.content();
+        content.retain();
+        LOGGER.info("type:{},[{}]count:{}", content.getClass(),content.hashCode(), content.refCnt());
+
         String body = content.toString(StandardCharsets.UTF_8);
         JSONObject jsonObject = JSONObject.parseObject(body);
         JSONObject data = jsonObject.getJSONObject("data");

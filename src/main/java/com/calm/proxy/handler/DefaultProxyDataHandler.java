@@ -12,11 +12,15 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.FullHttpResponse;
 import io.netty.util.ReferenceCountUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 public class DefaultProxyDataHandler extends SimpleChannelInboundHandler<FullHttpResponse> {
+    private final Logger LOGGER = LoggerFactory.getLogger(DefaultProxyDataHandler.class);
+
     private final Channel channel;
     private final FullHttpRequest request;
     private final UserPlanInfoRepository planInfoRepository;
@@ -29,7 +33,9 @@ public class DefaultProxyDataHandler extends SimpleChannelInboundHandler<FullHtt
 
     @Override
     public void channelRead0(ChannelHandlerContext ctx, FullHttpResponse response) {
-//        LOGGER.info("{}", msg);
+//        LOGGER.info("type:{},[{}]count:{}", response.getClass(),response.hashCode(), response.refCnt());
+//        ByteBuf content = response.content();
+//        LOGGER.info("type:{},[{}]count:{}", content.getClass(),content.hashCode(), content.refCnt());
 
         if (!channel.isOpen()) {
             ReferenceCountUtil.release(response);
