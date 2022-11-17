@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:mysql://10.3.247.59:3306/wanciwang_proxy?useUnicode=true&characterEncoding=UTF-8&useAffectedRows=true&serverTimezone=Asia/Shanghai
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: web
+    password: web123!@#
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

@@ -1,7 +1,8 @@
 package com.calm.proxy.proxy;
 
 import com.calm.proxy.ProxyHandler;
-import com.calm.proxy.handler.CreatePlanHandler;
+import com.calm.proxy.entity.UserPlanInfo;
+import com.calm.proxy.handler.PausePlanHandler;
 import com.calm.proxy.listener.AfterConnectionListener;
 import com.calm.proxy.repository.UserPlanInfoRepository;
 import io.netty.channel.ChannelHandlerContext;
@@ -16,10 +17,10 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
 //@Component
-public class DumpCreatePlanProxyHandler implements ProxyHandler {
+public class DumpPausePlanProxyHandler implements ProxyHandler {
     private final UserPlanInfoRepository planInfoRepository;
 
-    public DumpCreatePlanProxyHandler(UserPlanInfoRepository planInfoRepository) {
+    public DumpPausePlanProxyHandler(UserPlanInfoRepository planInfoRepository) {
         this.planInfoRepository = planInfoRepository;
     }
 
@@ -29,17 +30,19 @@ public class DumpCreatePlanProxyHandler implements ProxyHandler {
         if (!StringUtils.hasText(path)) {
             return false;
         }
-        return path.contains("plan/v1/create");
+        return path.contains("plan/pause");
     }
 
     @Override
     public void doHandle(ChannelHandlerContext ctx, FullHttpRequest request, HttpHeaders headers) {
         LOGGER.info("dump request :{} {}", request.method(), request.uri());
+        String uid = ctx.channel().attr(UID_ATTR_KAY).get();
+        modifyUser(headers, uid);
         String s = request.content().toString(StandardCharsets.UTF_8);
         System.out.println(s);
-        modifyUser(headers, "123456");
+        modifyRequestParameter(request, "plan_id", planInfoRepository.getUserPlanInfoByUid(uid).map(UserPlanInfo::getPlanId).orElse(""));
         //创建客户端连接目标机器
-        connectToRemote(ctx, URI.create(request.uri()), 10000, new HttpContentDecompressor(), new HttpObjectAggregator(1000 * 1024 * 1024), new CreatePlanHandler(planInfoRepository)).addListener(new AfterConnectionListener(ctx, request, headers));
+        connectToRemote(ctx, URI.create(request.uri()), 10000, new HttpContentDecompressor(), new HttpObjectAggregator(1000 * 1024 * 1024), new PausePlanHandler(planInfoRepository, ctx.channel())).addListener(new AfterConnectionListener(ctx, request, headers));
     }
 
 }

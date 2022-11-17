@@ -1,9 +1,11 @@
 package com.calm.proxy.proxy;
 
 import com.calm.proxy.ProxyHandler;
-import com.calm.proxy.handler.CreatePlanHandler;
+import com.calm.proxy.entity.UserPlanInfo;
+import com.calm.proxy.handler.UpdatePlanHandler;
 import com.calm.proxy.listener.AfterConnectionListener;
 import com.calm.proxy.repository.UserPlanInfoRepository;
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.HttpContentDecompressor;
@@ -14,12 +16,14 @@ import org.springframework.util.StringUtils;
 
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.Map;
 
-//@Component
-public class DumpCreatePlanProxyHandler implements ProxyHandler {
+@Component
+public class DumpUpdatePlanProxyHandler implements ProxyHandler {
     private final UserPlanInfoRepository planInfoRepository;
 
-    public DumpCreatePlanProxyHandler(UserPlanInfoRepository planInfoRepository) {
+    public DumpUpdatePlanProxyHandler(UserPlanInfoRepository planInfoRepository) {
         this.planInfoRepository = planInfoRepository;
     }
 
@@ -29,17 +33,24 @@ public class DumpCreatePlanProxyHandler implements ProxyHandler {
         if (!StringUtils.hasText(path)) {
             return false;
         }
-        return path.contains("plan/v1/create");
+        return path.contains("plan/update");
     }
 
     @Override
     public void doHandle(ChannelHandlerContext ctx, FullHttpRequest request, HttpHeaders headers) {
         LOGGER.info("dump request :{} {}", request.method(), request.uri());
-        String s = request.content().toString(StandardCharsets.UTF_8);
-        System.out.println(s);
-        modifyUser(headers, "123456");
+        String uid = ctx.channel().attr(UID_ATTR_KAY).get();
+        modifyUser(headers, uid);
+//        ByteBuf content = request.content();
+//        String s = content.toString(StandardCharsets.UTF_8);
+//        String planId = planInfoRepository.getUserPlanInfoByUid(uid).map(UserPlanInfo::getPlanId).orElse("");
+//
+//        String body = modifyKV(s, "plan_id", planId);
+//        content.clear();
+//        content.writeCharSequence(body, StandardCharsets.UTF_8);
+//        request.replace(content);
         //创建客户端连接目标机器
-        connectToRemote(ctx, URI.create(request.uri()), 10000, new HttpContentDecompressor(), new HttpObjectAggregator(1000 * 1024 * 1024), new CreatePlanHandler(planInfoRepository)).addListener(new AfterConnectionListener(ctx, request, headers));
+        connectToRemote(ctx, URI.create(request.uri()), 10000, new HttpContentDecompressor(), new HttpObjectAggregator(1000 * 1024 * 1024), new UpdatePlanHandler(planInfoRepository, ctx.channel())).addListener(new AfterConnectionListener(ctx, request, headers));
     }
 
 }
