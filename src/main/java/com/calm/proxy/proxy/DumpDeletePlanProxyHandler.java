@@ -6,6 +6,7 @@ import com.calm.proxy.service.UserPlanInfoService;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.HttpHeaders;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
@@ -13,7 +14,7 @@ import java.net.URI;
 import java.util.Map;
 import java.util.Optional;
 
-
+@Component
 public class DumpDeletePlanProxyHandler extends AbstractDumpProxyHandler implements ProxyHandler {
     @Resource
     private UserPlanInfoService userPlanInfoService;

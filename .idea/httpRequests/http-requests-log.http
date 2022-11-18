@@ -1,3 +1,195 @@
+POST http://recite.gray.perfectlingo.com/api/recite/plan/pause
+Host: 47.94.218.252
+Content-Type: application/x-www-form-urlencoded
+X-Eng-Auth: dt=2&osv=15.6.1&dk=iPhone10%2C3&av=1666096485&u=62110605&r=26d762a9b82549e78f93ef69f6793720&token=eL%2BEOJWI7X2vKYrZ3kkAr/AaoZsI7Dg32rY5Bau2LmE%3D&ts=1668685417333&sign=1&d=1&avn=3.1.0
+Accept: */*
+User-Agent: Ai-English/3.1.0 (iOS; iPhone X; 15.6.1; zh-Hans-CN)
+Accept-Language: zh-Hans-CN;q=1, en-CN;q=0.9
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+plan_id=15197&version=1
+
+<> 2022-11-18T171943.200.json
+
+###
+
+POST http://recite.gray.perfectlingo.com/api/recite/plan/pause
+Host: 47.94.218.252
+Content-Type: application/x-www-form-urlencoded
+X-Eng-Auth: dt=2&osv=15.6.1&dk=iPhone10%2C3&av=1666096485&u=62110605&r=26d762a9b82549e78f93ef69f6793720&token=eL%2BEOJWI7X2vKYrZ3kkAr/AaoZsI7Dg32rY5Bau2LmE%3D&ts=1668685417333&sign=1&d=1&avn=3.1.0
+Accept: */*
+User-Agent: Ai-English/3.1.0 (iOS; iPhone X; 15.6.1; zh-Hans-CN)
+Accept-Language: zh-Hans-CN;q=1, en-CN;q=0.9
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+plan_id=15197&version=1
+
+<> 2022-11-18T171755.200.json
+
+###
+
+POST http://recite.gray.perfectlingo.com/api/recite/plan/pause
+Host: 47.94.218.252
+Content-Type: application/x-www-form-urlencoded
+X-Eng-Auth: dt=2&osv=15.6.1&dk=iPhone10%2C3&av=1666096485&u=62110605&r=26d762a9b82549e78f93ef69f6793720&token=eL%2BEOJWI7X2vKYrZ3kkAr/AaoZsI7Dg32rY5Bau2LmE%3D&ts=1668685417333&sign=1&d=1&avn=3.1.0
+Accept: */*
+User-Agent: Ai-English/3.1.0 (iOS; iPhone X; 15.6.1; zh-Hans-CN)
+Accept-Language: zh-Hans-CN;q=1, en-CN;q=0.9
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+plan_id=15197&version=1
+
+<> 2022-11-18T171500.200.json
+
+###
+
+POST http://recite.gray.perfectlingo.com/api/recite/plan/pause
+Host: 47.94.218.252
+Content-Type: application/x-www-form-urlencoded
+X-Eng-Auth: dt=2&osv=15.6.1&dk=iPhone10%2C3&av=1666096485&u=62110605&r=26d762a9b82549e78f93ef69f6793720&token=eL%2BEOJWI7X2vKYrZ3kkAr/AaoZsI7Dg32rY5Bau2LmE%3D&ts=1668685417333&sign=1&d=1&avn=3.1.0
+Accept: */*
+User-Agent: Ai-English/3.1.0 (iOS; iPhone X; 15.6.1; zh-Hans-CN)
+Accept-Language: zh-Hans-CN;q=1, en-CN;q=0.9
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+plan_id=15197&version=1
+
+<> 2022-11-18T171343.200.json
+
+###
+
+POST http://recite.gray.perfectlingo.com/api/recite/plan/pause
+Host: 47.94.218.252
+Content-Type: application/x-www-form-urlencoded
+X-Eng-Auth: dt=2&osv=15.6.1&dk=iPhone10%2C3&av=1666096485&u=62110605&r=26d762a9b82549e78f93ef69f6793720&token=eL%2BEOJWI7X2vKYrZ3kkAr/AaoZsI7Dg32rY5Bau2LmE%3D&ts=1668685417333&sign=1&d=1&avn=3.1.0
+Accept: */*
+User-Agent: Ai-English/3.1.0 (iOS; iPhone X; 15.6.1; zh-Hans-CN)
+Accept-Language: zh-Hans-CN;q=1, en-CN;q=0.9
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+plan_id=15197&version=1
+
+<> 2022-11-18T165444.200.json
+
+###
+
+POST http://recite.gray.perfectlingo.com/api/recite/plan/pause
+Host: 47.94.218.252
+Content-Type: application/x-www-form-urlencoded
+X-Eng-Auth: dt=2&osv=15.6.1&dk=iPhone10%2C3&av=1666096485&u=62110605&r=26d762a9b82549e78f93ef69f6793720&token=eL%2BEOJWI7X2vKYrZ3kkAr/AaoZsI7Dg32rY5Bau2LmE%3D&ts=1668685417333&sign=1&d=1&avn=3.1.0
+Accept: */*
+User-Agent: Ai-English/3.1.0 (iOS; iPhone X; 15.6.1; zh-Hans-CN)
+Accept-Language: zh-Hans-CN;q=1, en-CN;q=0.9
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+plan_id=15197&version=1
+
+<> 2022-11-18T165347.200.txt
+
+###
+
+POST http://recite.gray.perfectlingo.com/api/recite/plan/v1/create
+Host: 47.94.218.252
+Content-Type: application/x-www-form-urlencoded
+X-Eng-Auth: dt=2&osv=15.6.1&dk=iPhone10%2C3&av=1666096485&u=62110605&r=26d762a9b82549e78f93ef69f6793720&token=eL%2BEOJWI7X2vKYrZ3kkAr/AaoZsI7Dg32rY5Bau2LmE%3D&ts=1668685417333&sign=1&d=1&avn=3.1.0
+Accept: */*
+User-Agent: Ai-English/3.1.0 (iOS; iPhone X; 15.6.1; zh-Hans-CN)
+Accept-Language: zh-Hans-CN;q=1, en-CN;q=0.9
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+ab_model=1&belong_id=286&belong_type=1&daily_count=10&order_type=0&remove_master=7&remove_review=1
+
+<> 2022-11-18T165323.200.txt
+
+###
+
+POST http://recite.gray.perfectlingo.com/api/recite/plan/pause
+Host: 47.94.218.252
+Content-Type: application/x-www-form-urlencoded
+X-Eng-Auth: dt=2&osv=15.6.1&dk=iPhone10%2C3&av=1666096485&u=62110605&r=26d762a9b82549e78f93ef69f6793720&token=eL%2BEOJWI7X2vKYrZ3kkAr/AaoZsI7Dg32rY5Bau2LmE%3D&ts=1668685417333&sign=1&d=1&avn=3.1.0
+Accept: */*
+User-Agent: Ai-English/3.1.0 (iOS; iPhone X; 15.6.1; zh-Hans-CN)
+Accept-Language: zh-Hans-CN;q=1, en-CN;q=0.9
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+plan_id=15108&version=1
+
+<> 2022-11-18T165319.200.json
+
+###
+
+POST http://recite.gray.perfectlingo.com/api/recite/plan/pause
+Host: 47.94.218.252
+Content-Type: application/x-www-form-urlencoded
+X-Eng-Auth: dt=2&osv=15.6.1&dk=iPhone10%2C3&av=1666096485&u=62110605&r=26d762a9b82549e78f93ef69f6793720&token=eL%2BEOJWI7X2vKYrZ3kkAr/AaoZsI7Dg32rY5Bau2LmE%3D&ts=1668685417333&sign=1&d=1&avn=3.1.0
+Accept: */*
+User-Agent: Ai-English/3.1.0 (iOS; iPhone X; 15.6.1; zh-Hans-CN)
+Accept-Language: zh-Hans-CN;q=1, en-CN;q=0.9
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+plan_id=15108&version=1
+
+<> 2022-11-18T165255.200.json
+
+###
+
+POST http://recite.gray.perfectlingo.com/api/recite/plan/pause
+Host: 47.94.218.252
+Content-Type: application/x-www-form-urlencoded
+X-Eng-Auth: dt=2&osv=15.6.1&dk=iPhone10%2C3&av=1666096485&u=62110605&r=26d762a9b82549e78f93ef69f6793720&token=eL%2BEOJWI7X2vKYrZ3kkAr/AaoZsI7Dg32rY5Bau2LmE%3D&ts=1668685417333&sign=1&d=1&avn=3.1.0
+Accept: */*
+User-Agent: Ai-English/3.1.0 (iOS; iPhone X; 15.6.1; zh-Hans-CN)
+Accept-Language: zh-Hans-CN;q=1, en-CN;q=0.9
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+plan_id=15108&version=1
+
+<> 2022-11-18T164458.200.json
+
+###
+
+POST http://recite.gray.perfectlingo.com/api/recite/plan/v1/create
+Host: 47.94.218.252
+Content-Type: application/x-www-form-urlencoded
+X-Eng-Auth: dt=2&osv=15.6.1&dk=iPhone10%2C3&av=1666096485&u=62110605&r=26d762a9b82549e78f93ef69f6793720&token=eL%2BEOJWI7X2vKYrZ3kkAr/AaoZsI7Dg32rY5Bau2LmE%3D&ts=1668685417333&sign=1&d=1&avn=3.1.0
+Accept: */*
+User-Agent: Ai-English/3.1.0 (iOS; iPhone X; 15.6.1; zh-Hans-CN)
+Accept-Language: zh-Hans-CN;q=1, en-CN;q=0.9
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+ab_model=1&belong_id=285&belong_type=1&daily_count=10&order_type=0&remove_master=7&remove_review=1
+
+<> 2022-11-18T164254.200.json
+
+###
+
+POST http://recite.gray.perfectlingo.com/api/recite/plan/v1/create
+Host: 47.94.218.252
+Content-Type: application/x-www-form-urlencoded
+X-Eng-Auth: dt=2&osv=15.6.1&dk=iPhone10%2C3&av=1666096485&u=62110605&r=26d762a9b82549e78f93ef69f6793720&token=eL%2BEOJWI7X2vKYrZ3kkAr/AaoZsI7Dg32rY5Bau2LmE%3D&ts=1668685417333&sign=1&d=1&avn=3.1.0
+Accept: */*
+User-Agent: Ai-English/3.1.0 (iOS; iPhone X; 15.6.1; zh-Hans-CN)
+Accept-Language: zh-Hans-CN;q=1, en-CN;q=0.9
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+
+ab_model=1&belong_id=285&belong_type=1&daily_count=10&order_type=0&remove_master=7&remove_review=1
+
+<> 2022-11-18T164245.200.json
+
+###
+
 POST http://recite.gray.perfectlingo.com/api/recite/plan/v1/create
 Host: 47.94.218.252
 Content-Type: application/x-www-form-urlencoded
@@ -595,198 +787,6 @@ Connection: keep-alive
 ab_model=1&belong_id=281&belong_type=1&daily_count=10&order_type=0&remove_master=7&remove_review=1
 
 <> 2022-11-18T113530.400.txt
-
-###
-
-POST http://recite.gray.perfectlingo.com/api/recite/plan/v1/create
-Host: 47.94.218.252
-Content-Type: application/x-www-form-urlencoded
-X-Eng-Auth: dt%3D2%26osv%3D15.6.1%26dk%3DiPhone10%252C3%26av%3D1666096485%26u%3D62110600%26r%3D26d762a9b82549e78f93ef69f6793720%26token%3DeL%252BEOJWI7X2vKYrZ3kkAr/AaoZsI7Dg32rY5Bau2LmE%253D%26ts%3D1668685417333%26sign%3D1%26d%3D1%26avn%3D3.1.0
-Accept: */*
-User-Agent: Ai-English/3.1.0 (iOS; iPhone X; 15.6.1; zh-Hans-CN)
-Accept-Language: zh-Hans-CN;q=1, en-CN;q=0.9
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-
-ab_model=1&belong_id=281&belong_type=1&daily_count=10&order_type=0&remove_master=7&remove_review=1
-
-<> 2022-11-18T113341.400.txt
-
-###
-
-POST http://recite.gray.perfectlingo.com/api/recite/plan/v1/create
-Host: 47.94.218.252
-Content-Type: application/x-www-form-urlencoded
-X-Eng-Auth: dt%3D2%26osv%3D15.6.1%26dk%3DiPhone10%252C3%26av%3D1666096485%26u%3D62110600%26r%3D26d762a9b82549e78f93ef69f6793720%26token%3DeL%252BEOJWI7X2vKYrZ3kkAr/AaoZsI7Dg32rY5Bau2LmE%253D%26ts%3D1668685417333%26sign%3D1%26d%3D1%26avn%3D3.1.0
-Accept: */*
-User-Agent: Ai-English/3.1.0 (iOS; iPhone X; 15.6.1; zh-Hans-CN)
-Accept-Language: zh-Hans-CN;q=1, en-CN;q=0.9
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-
-ab_model=1&belong_id=281&belong_type=1&daily_count=10&order_type=0&remove_master=7&remove_review=1
-
-<> 2022-11-18T112934.400.txt
-
-###
-
-POST http://recite.gray.perfectlingo.com/api/recite/plan/v1/create
-Host: 47.94.218.252
-Content-Type: application/x-www-form-urlencoded
-X-Eng-Auth: dt%3D2%26osv%3D15.6.1%26dk%3DiPhone10%252C3%26av%3D1666096485%26u%3D62110600%26r%3D26d762a9b82549e78f93ef69f6793720%26token%3DeL%252BEOJWI7X2vKYrZ3kkAr/AaoZsI7Dg32rY5Bau2LmE%253D%26ts%3D1668685417333%26sign%3D1%26d%3D1%26avn%3D3.1.0
-Accept: */*
-User-Agent: Ai-English/3.1.0 (iOS; iPhone X; 15.6.1; zh-Hans-CN)
-Accept-Language: zh-Hans-CN;q=1, en-CN;q=0.9
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-
-ab_model=1&belong_id=281&belong_type=1&daily_count=10&order_type=0&remove_master=7&remove_review=1
-
-<> 2022-11-18T112800.400.txt
-
-###
-
-POST http://recite.gray.perfectlingo.com/api/recite/plan/v1/create
-Host: 47.94.218.252
-Content-Type: application/x-www-form-urlencoded
-X-Eng-Auth: dt%3D2%26osv%3D15.6.1%26dk%3DiPhone10%252C3%26av%3D1666096485%26u%3D62110600%26r%3D26d762a9b82549e78f93ef69f6793720%26token%3DeL%252BEOJWI7X2vKYrZ3kkAr/AaoZsI7Dg32rY5Bau2LmE%253D%26ts%3D1668685417333%26sign%3D1%26d%3D1%26avn%3D3.1.0
-Accept: */*
-User-Agent: Ai-English/3.1.0 (iOS; iPhone X; 15.6.1; zh-Hans-CN)
-Accept-Language: zh-Hans-CN;q=1, en-CN;q=0.9
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-
-ab_model=1&belong_id=281&belong_type=1&daily_count=10&order_type=0&remove_master=7&remove_review=1
-
-<> 2022-11-18T112458.400.txt
-
-###
-
-POST http://recite.gray.perfectlingo.com/api/recite/plan/v1/create
-Host: 47.94.218.252
-Content-Type: application/x-www-form-urlencoded
-X-Eng-Auth: dt%3D2%26osv%3D15.6.1%26dk%3DiPhone10%252C3%26av%3D1666096485%26u%3D62110600%26r%3D26d762a9b82549e78f93ef69f6793720%26token%3DeL%252BEOJWI7X2vKYrZ3kkAr/AaoZsI7Dg32rY5Bau2LmE%253D%26ts%3D1668685417333%26sign%3D1%26d%3D1%26avn%3D3.1.0
-Accept: */*
-User-Agent: Ai-English/3.1.0 (iOS; iPhone X; 15.6.1; zh-Hans-CN)
-Accept-Language: zh-Hans-CN;q=1, en-CN;q=0.9
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-
-ab_model=1&belong_id=281&belong_type=1&daily_count=10&order_type=0&remove_master=7&remove_review=1
-
-<> 2022-11-18T103006.400.txt
-
-###
-
-POST http://recite.gray.perfectlingo.com/api/recite/plan/v1/create
-Host: 47.94.218.252
-Content-Type: application/x-www-form-urlencoded
-X-Eng-Auth: dt%3D2%26osv%3D15.6.1%26dk%3DiPhone10%252C3%26av%3D1666096485%26u%3D62110600%26r%3D26d762a9b82549e78f93ef69f6793720%26token%3DeL%252BEOJWI7X2vKYrZ3kkAr/AaoZsI7Dg32rY5Bau2LmE%253D%26ts%3D1668685417333%26sign%3D1%26d%3D1%26avn%3D3.1.0
-Accept: */*
-User-Agent: Ai-English/3.1.0 (iOS; iPhone X; 15.6.1; zh-Hans-CN)
-Accept-Language: zh-Hans-CN;q=1, en-CN;q=0.9
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-
-ab_model=1&belong_id=281&belong_type=1&daily_count=10&order_type=0&remove_master=7&remove_review=1
-
-<> 2022-11-18T102559.400.txt
-
-###
-
-POST http://recite.gray.perfectlingo.com/api/recite/plan/v1/create
-Host: 47.94.218.252
-Content-Type: application/x-www-form-urlencoded
-X-Eng-Auth: dt%3D2%26osv%3D15.6.1%26dk%3DiPhone10%252C3%26av%3D1666096485%26u%3D62110600%26r%3D26d762a9b82549e78f93ef69f6793720%26token%3DeL%252BEOJWI7X2vKYrZ3kkAr/AaoZsI7Dg32rY5Bau2LmE%253D%26ts%3D1668685417333%26sign%3D1%26d%3D1%26avn%3D3.1.0
-Accept: */*
-User-Agent: Ai-English/3.1.0 (iOS; iPhone X; 15.6.1; zh-Hans-CN)
-Accept-Language: zh-Hans-CN;q=1, en-CN;q=0.9
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-
-ab_model=1&belong_id=281&belong_type=1&daily_count=10&order_type=0&remove_master=7&remove_review=1
-
-<> 2022-11-18T003529.200.json
-
-###
-
-POST http://recite.gray.perfectlingo.com/api/recite/plan/v1/create
-Host: 47.94.218.252
-Content-Type: application/x-www-form-urlencoded
-X-Eng-Auth: dt%3D2%26osv%3D15.6.1%26dk%3DiPhone10%252C3%26av%3D1666096485%26u%3D61110605%26r%3D26d762a9b82549e78f93ef69f6793720%26token%3DeL%252BEOJWI7X2vKYrZ3kkAr/AaoZsI7Dg32rY5Bau2LmE%253D%26ts%3D1668685417333%26sign%3D1%26d%3D1%26avn%3D3.1.0
-Accept: */*
-User-Agent: Ai-English/3.1.0 (iOS; iPhone X; 15.6.1; zh-Hans-CN)
-Accept-Language: zh-Hans-CN;q=1, en-CN;q=0.9
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-
-ab_model=1&belong_id=281&belong_type=1&daily_count=10&order_type=0&remove_master=7&remove_review=1
-
-<> 2022-11-18T003511.200.json
-
-###
-
-POST http://recite.gray.perfectlingo.com/api/recite/plan/v1/create
-Host: 47.94.218.252
-Content-Type: application/x-www-form-urlencoded
-X-Eng-Auth: dt%3D2%26osv%3D15.6.1%26dk%3DiPhone10%252C3%26av%3D1666096485%26u%3D62112605%26r%3D26d762a9b82549e78f93ef69f6793720%26token%3DeL%252BEOJWI7X2vKYrZ3kkAr/AaoZsI7Dg32rY5Bau2LmE%253D%26ts%3D1668685417333%26sign%3D1%26d%3D1%26avn%3D3.1.0
-Accept: */*
-User-Agent: Ai-English/3.1.0 (iOS; iPhone X; 15.6.1; zh-Hans-CN)
-Accept-Language: zh-Hans-CN;q=1, en-CN;q=0.9
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-
-ab_model=1&belong_id=281&belong_type=1&daily_count=10&order_type=0&remove_master=7&remove_review=1
-
-<> 2022-11-18T003455.200.json
-
-###
-
-POST http://recite.gray.perfectlingo.com/api/recite/plan/v1/create
-Host: 47.94.218.252
-Content-Type: application/x-www-form-urlencoded
-X-Eng-Auth: dt%3D2%26osv%3D15.6.1%26dk%3DiPhone10%252C3%26av%3D1666096485%26u%3D62111605%26r%3D26d762a9b82549e78f93ef69f6793720%26token%3DeL%252BEOJWI7X2vKYrZ3kkAr/AaoZsI7Dg32rY5Bau2LmE%253D%26ts%3D1668685417333%26sign%3D1%26d%3D1%26avn%3D3.1.0
-Accept: */*
-User-Agent: Ai-English/3.1.0 (iOS; iPhone X; 15.6.1; zh-Hans-CN)
-Accept-Language: zh-Hans-CN;q=1, en-CN;q=0.9
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-
-ab_model=1&belong_id=281&belong_type=1&daily_count=10&order_type=0&remove_master=7&remove_review=1
-
-<> 2022-11-18T003438.200.json
-
-###
-
-POST http://recite.gray.perfectlingo.com/api/recite/plan/v1/create
-Host: 47.94.218.252
-Content-Type: application/x-www-form-urlencoded
-X-Eng-Auth: dt%3D2%26osv%3D15.6.1%26dk%3DiPhone10%252C3%26av%3D1666096485%26u%3D62110605%26r%3D26d762a9b82549e78f93ef69f6793720%26token%3DeL%252BEOJWI7X2vKYrZ3kkAr/AaoZsI7Dg32rY5Bau2LmE%253D%26ts%3D1668685417333%26sign%3D1%26d%3D1%26avn%3D3.1.0
-Accept: */*
-User-Agent: Ai-English/3.1.0 (iOS; iPhone X; 15.6.1; zh-Hans-CN)
-Accept-Language: zh-Hans-CN;q=1, en-CN;q=0.9
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-
-ab_model=1&belong_id=281&belong_type=1&daily_count=10&order_type=0&remove_master=7&remove_review=1
-
-<> 2022-11-18T003247.200.txt
-
-###
-
-POST http://recite.gray.perfectlingo.com/api/recite/plan/v1/create
-Host: 47.94.218.252
-Content-Type: application/x-www-form-urlencoded
-X-Eng-Auth: dt%3D2%26osv%3D15.6.1%26dk%3DiPhone10%252C3%26av%3D1666096485%26u%3D62110605%26r%3D26d762a9b82549e78f93ef69f6793720%26token%3DeL%252BEOJWI7X2vKYrZ3kkAr/AaoZsI7Dg32rY5Bau2LmE%253D%26ts%3D1668685417333%26sign%3D1%26d%3D1%26avn%3D3.1.0
-Accept: */*
-User-Agent: Ai-English/3.1.0 (iOS; iPhone X; 15.6.1; zh-Hans-CN)
-Accept-Language: zh-Hans-CN;q=1, en-CN;q=0.9
-Accept-Encoding: gzip, deflate
-Connection: keep-alive
-
-ab_model=1&belong_id=181&belong_type=1&daily_count=10&order_type=0&remove_master=7&remove_review=1
-
-<> 2022-11-18T003241.200.json
 
 ###
 

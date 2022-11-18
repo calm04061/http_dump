@@ -10,11 +10,12 @@ import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.HttpHeaders;
 import io.netty.handler.codec.http.HttpMethod;
 import org.springframework.core.Ordered;
+import org.springframework.stereotype.Component;
 
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
-
+@Component
 public class DefaultProxyHandler extends AbstractProxyHandler implements ProxyHandler, Ordered {
 
 

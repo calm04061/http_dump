@@ -2,9 +2,6 @@ package com.calm.proxy;
 
 
 import com.calm.proxy.handler.HttpProxyHandler;
-import com.calm.proxy.proxy.DefaultProxyHandler;
-import com.calm.proxy.proxy.DumpCreatePlanProxyHandler;
-import com.calm.proxy.proxy.DumpDeletePlanProxyHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -19,7 +16,6 @@ import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 
 import javax.annotation.Resource;
 
@@ -27,20 +23,6 @@ import javax.annotation.Resource;
 public class ProxyApplication implements CommandLineRunner {
     @Resource
     private ObjectProvider<ProxyHandler> handlerObjectProvider;
-
-    @Bean
-    public DefaultProxyHandler defaultProxyHandler() {
-        return new DefaultProxyHandler();
-    }
-
-    @Bean
-    public DumpCreatePlanProxyHandler dumpProxyHandler() {
-        return new DumpCreatePlanProxyHandler();
-    }
-    @Bean
-    public DumpDeletePlanProxyHandler deletePlanProxyHandler() {
-        return new DumpDeletePlanProxyHandler();
-    }
 
     public static void main(String[] args) {
         SpringApplication.run(ProxyApplication.class, args);
