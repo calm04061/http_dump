@@ -10,12 +10,9 @@ import org.springframework.beans.factory.ObjectProvider;
 
 public class RecordDataTransHandler extends ResponseDataHandler {
     private final Channel clientChannel;
-    private final ObjectProvider<HandlerRecode> handlerRecodes;
-
     public RecordDataTransHandler(ObjectProvider<HandlerRecode> handlerRecodes, Channel clientChannel) {
         super(handlerRecodes);
         this.clientChannel = clientChannel;
-        this.handlerRecodes = handlerRecodes;
     }
 
     @Override
