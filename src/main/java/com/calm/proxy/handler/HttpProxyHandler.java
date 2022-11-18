@@ -1,10 +1,13 @@
 package com.calm.proxy.handler;
 
 import com.calm.proxy.ProxyHandler;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.FullHttpRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.util.StringUtils;
 
@@ -17,6 +20,7 @@ import java.util.stream.Collectors;
 import static com.calm.proxy.ProxyHandler.*;
 
 public class HttpProxyHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
+    private final Logger logger = LoggerFactory.getLogger(getClass());
     private final ObjectProvider<ProxyHandler> handlerObjectProvider;
 
     public HttpProxyHandler(ObjectProvider<ProxyHandler> handlerObjectProvider) {
@@ -29,7 +33,7 @@ public class HttpProxyHandler extends SimpleChannelInboundHandler<FullHttpReques
         List<ProxyHandler> collect = handlerObjectProvider.stream().collect(Collectors.toList());
         String auth = request.headers().get(AUTH_HEADER);
         if (StringUtils.hasText(auth)) {
-            auth = ProxyHandler.toString(parseKV(URLDecoder.decode(auth,StandardCharsets.UTF_8)));
+            auth = ProxyHandler.toString(parseKV(URLDecoder.decode(auth, StandardCharsets.UTF_8)));
             request.headers().set(AUTH_HEADER, auth);
         }
         Channel channel = ctx.channel();
@@ -38,11 +42,15 @@ public class HttpProxyHandler extends SimpleChannelInboundHandler<FullHttpReques
         channel.attr(REQUEST_BODY_KEY).set(requestBody);
         Map<String, String> stringListMap = ProxyHandler.parseKV(auth);
         channel.attr(UID_KEY).set(stringListMap.get("u"));
-        for (ProxyHandler handler:collect){
+        for (ProxyHandler handler : collect) {
             FullHttpRequest copy = request.copy();
 
-            if(handler.isSupport(copy)){
-                handler.handle(ctx,copy);
+            if (handler.isSupport(copy)) {
+                try {
+                    handler.handle(ctx, copy);
+                } catch (JsonProcessingException e) {
+                    logger.error("", e);
+                }
             }
         }
     }

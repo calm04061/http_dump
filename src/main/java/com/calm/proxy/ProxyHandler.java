@@ -1,5 +1,6 @@
 package com.calm.proxy;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
@@ -31,7 +32,7 @@ public interface ProxyHandler {
 
     boolean isSupport(FullHttpRequest request);
 
-    default void handle(ChannelHandlerContext ctx, FullHttpRequest request) {
+    default void handle(ChannelHandlerContext ctx, FullHttpRequest request) throws JsonProcessingException {
         //从请求头中，获取目标地址
         //该请求头，有发送方和代理服务协商，或者使用常用请求头host
         HttpHeaders headers = request.headers();
@@ -134,5 +135,5 @@ public interface ProxyHandler {
         request.setUri(targetUri);
     }
 
-    boolean preHandler(ChannelHandlerContext ctx, FullHttpRequest request, HttpHeaders headers);
+    boolean preHandler(ChannelHandlerContext ctx, FullHttpRequest request, HttpHeaders headers) throws JsonProcessingException;
 }

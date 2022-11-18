@@ -3,6 +3,7 @@ package com.calm.proxy.proxy;
 import com.calm.proxy.ProxyHandler;
 import com.calm.proxy.entity.UserPlanInfo;
 import com.calm.proxy.service.UserPlanInfoService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.HttpHeaders;
@@ -29,7 +30,7 @@ public class DumpDeletePlanProxyHandler extends AbstractDumpProxyHandler impleme
     }
 
     @Override
-    public boolean preHandler(ChannelHandlerContext ctx, FullHttpRequest request, HttpHeaders headers) {
+    public boolean preHandler(ChannelHandlerContext ctx, FullHttpRequest request, HttpHeaders headers) throws JsonProcessingException {
         super.preHandler(ctx, request, headers);
         String uri = request.uri();
         String rawQuery = URI.create(uri).getRawQuery();

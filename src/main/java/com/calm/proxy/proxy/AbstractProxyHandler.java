@@ -18,7 +18,7 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
 public abstract class AbstractProxyHandler implements ProxyHandler {
-    public Logger LOGGER = org.slf4j.LoggerFactory.getLogger(getClass());
+    public final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(getClass());
     private ObjectProvider<HandlerRecode> handlerRecodes;
 
     @Override

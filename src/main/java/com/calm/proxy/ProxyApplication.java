@@ -38,7 +38,7 @@ public class ProxyApplication implements CommandLineRunner {
 //                .option(ChannelOption.TCP_NODELAY, false)
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
-                    protected void initChannel(SocketChannel socketChannel) throws Exception {
+                    protected void initChannel(SocketChannel socketChannel) {
                         ChannelPipeline pipeline = socketChannel.pipeline();
                         //Http编解码器
                         pipeline.addLast(ChannelHandlerDefine.HTTP_CODEC, new HttpServerCodec());

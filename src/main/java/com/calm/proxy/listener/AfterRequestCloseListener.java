@@ -5,10 +5,8 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 
 public class AfterRequestCloseListener implements ChannelFutureListener {
-    private final ChannelHandlerContext ctx;
 
     public AfterRequestCloseListener(ChannelHandlerContext ctx) {
-        this.ctx = ctx;
     }
 
     @Override

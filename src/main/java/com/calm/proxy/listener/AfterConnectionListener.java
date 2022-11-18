@@ -20,7 +20,7 @@ import java.util.Optional;
 import static com.calm.proxy.ProxyHandler.*;
 
 public class AfterConnectionListener implements ChannelFutureListener {
-    Logger LOGGER = LoggerFactory.getLogger(AfterConnectionListener.class);
+    final Logger LOGGER = LoggerFactory.getLogger(AfterConnectionListener.class);
 
     private final ChannelHandlerContext ctx;
     private final FullHttpRequest request;
@@ -39,7 +39,7 @@ public class AfterConnectionListener implements ChannelFutureListener {
     }
 
     @Override
-    public void operationComplete(ChannelFuture channelFuture) throws Exception {
+    public void operationComplete(ChannelFuture channelFuture) {
         if (channelFuture.isSuccess()) {
             //代理服务器连接目标服务器成功
             //发送消息到目标服务器
