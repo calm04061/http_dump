@@ -3,8 +3,6 @@ package com.calm.proxy.proxy;
 import com.calm.proxy.ProxyHandler;
 import com.calm.proxy.entity.UserPlanInfo;
 import com.calm.proxy.service.UserPlanInfoService;
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufAllocator;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.HttpHeaders;

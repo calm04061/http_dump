@@ -4,6 +4,7 @@ import com.calm.proxy.recode.HandlerRecode;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.FullHttpResponse;
+import io.netty.handler.codec.http.HttpHeaderNames;
 import io.netty.util.ReferenceCountUtil;
 import org.springframework.beans.factory.ObjectProvider;
 
@@ -24,6 +25,7 @@ public class RecordDataTransHandler extends ResponseDataHandler {
             return;
         }
         super.channelRead0(ctx,msg);
+        msg.headers().set(HttpHeaderNames.CONTENT_TYPE,"application/json");
         msg.retain();
         clientChannel.writeAndFlush(msg);
     }

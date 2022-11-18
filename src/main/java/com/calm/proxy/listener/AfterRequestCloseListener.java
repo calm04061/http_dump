@@ -1,11 +1,8 @@
 package com.calm.proxy.listener;
 
-import com.calm.proxy.ChannelHandlerDefine;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
-
-import java.util.NoSuchElementException;
 
 public class AfterRequestCloseListener implements ChannelFutureListener {
     private final ChannelHandlerContext ctx;

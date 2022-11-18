@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.calm.proxy.ProxyHandler.*;
-import static com.calm.proxy.ProxyHandler.REQUEST_METHOD_KEY;
 
 public class ResponseDataHandler extends SimpleChannelInboundHandler<FullHttpResponse> {
     private final ObjectProvider<HandlerRecode> handlerRecodes;
