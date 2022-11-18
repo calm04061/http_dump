@@ -4,7 +4,9 @@ import com.calm.proxy.ProxyHandler;
 import io.netty.channel.*;
 import io.netty.handler.codec.http.*;
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.util.StringUtils;
 
+import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +26,12 @@ public class HttpProxyHandler extends SimpleChannelInboundHandler<FullHttpReques
     protected void channelRead0(ChannelHandlerContext ctx, FullHttpRequest request) {
         List<ProxyHandler> collect = handlerObjectProvider.stream().collect(Collectors.toList());
         String auth = request.headers().get(AUTH_HEADER);
+        if (StringUtils.hasText(auth)) {
+            auth = ProxyHandler.toString(parseKV(URLDecoder.decode(auth,StandardCharsets.UTF_8)));
+            request.headers().set(AUTH_HEADER, auth);
+        }
         Channel channel = ctx.channel();
+
         String requestBody = request.content().toString(StandardCharsets.UTF_8);
         channel.attr(REQUEST_BODY_KEY).set(requestBody);
         Map<String, List<String>> stringListMap = ProxyHandler.parseKV(auth);

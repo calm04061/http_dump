@@ -13,10 +13,10 @@ import io.netty.util.ReferenceCountUtil;
 import org.springframework.util.StringUtils;
 
 import java.net.InetSocketAddress;
-import java.net.InterfaceAddress;
 import java.net.URI;
 import java.net.URLDecoder;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -42,6 +42,8 @@ public interface ProxyHandler {
         request.setUri("http://recite.gray.perfectlingo.com" + uri.getPath() + query);
         //修改目标地址
         headers.set("Host", "recite.gray.perfectlingo.com");
+
+
         headers.set("Test", "1");
 
         ReferenceCountUtil.retain(request);
@@ -55,7 +57,8 @@ public interface ProxyHandler {
             @Override
             protected void initChannel(SocketChannel socketChannel) {
                 ChannelPipeline pipeline = socketChannel.pipeline();
-                InetSocketAddress inetSocketAddress =new InetSocketAddress("127.0.0.1",8888);
+//                pipeline.addLast(new LoggingHandler(LogLevel.INFO));
+                InetSocketAddress inetSocketAddress = new InetSocketAddress("127.0.0.1", 8890);
                 pipeline.addLast(new HttpProxyHandler(inetSocketAddress));
                 //增加http编码器
                 pipeline.addLast(ChannelHandlerDefine.HTTP_CLIENT_CODEC, new HttpClientCodec());
@@ -93,7 +96,7 @@ public interface ProxyHandler {
         return toString(stringListMap);
     }
 
-    static Map<String, List<String>> parseKV(String kv) {
+    public static Map<String, List<String>> parseKV(String kv) {
         Map<String, List<String>> result = new HashMap<>();
         if (kv == null) {
             return result;
@@ -113,12 +116,11 @@ public interface ProxyHandler {
         return result;
     }
 
-    static String toString(Map<String, List<String>> valueMap) {
+    public static String toString(Map<String, List<String>> valueMap) {
         StringJoiner joiner = new StringJoiner("&");
-
-        for (Map.Entry<String, List<String>> row : valueMap.entrySet()) {
-            List<String> values = row.getValue();
-            String key = row.getKey();
+        List<String> collect = valueMap.keySet().stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+        for (String key : collect) {
+            List<String> values = valueMap.get(key);
             for (String value : values) {
                 joiner.add(key + "=" + value);
             }
