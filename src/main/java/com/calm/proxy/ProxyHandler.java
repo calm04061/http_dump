@@ -6,13 +6,11 @@ import io.netty.channel.*;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.http.*;
-import io.netty.handler.proxy.HttpProxyHandler;
 import io.netty.util.AttributeKey;
 import io.netty.util.CharsetUtil;
 import io.netty.util.ReferenceCountUtil;
 import org.springframework.util.StringUtils;
 
-import java.net.InetSocketAddress;
 import java.net.URI;
 import java.net.URLDecoder;
 import java.util.*;
@@ -63,8 +61,8 @@ public interface ProxyHandler {
             protected void initChannel(SocketChannel socketChannel) {
                 ChannelPipeline pipeline = socketChannel.pipeline();
 //                pipeline.addLast(new LoggingHandler(LogLevel.INFO));
-                InetSocketAddress inetSocketAddress = new InetSocketAddress("127.0.0.1", 8890);
-                pipeline.addLast(new HttpProxyHandler(inetSocketAddress));
+//                InetSocketAddress inetSocketAddress = new InetSocketAddress("127.0.0.1", 8890);
+//                pipeline.addLast(new HttpProxyHandler(inetSocketAddress));
                 //增加http编码器
                 pipeline.addLast(ChannelHandlerDefine.HTTP_CLIENT_CODEC, new HttpClientCodec());
 
@@ -99,7 +97,7 @@ public interface ProxyHandler {
         return toString(stringListMap);
     }
 
-    public static Map<String, String> parseKV(String kv) {
+    static Map<String, String> parseKV(String kv) {
         Map<String, String> result = new HashMap<>();
         if (kv == null) {
             return result;
@@ -118,7 +116,7 @@ public interface ProxyHandler {
         return result;
     }
 
-    public static String toString(Map<String, String> valueMap) {
+    static String toString(Map<String, String> valueMap) {
         StringJoiner joiner = new StringJoiner("&");
         List<String> collect = valueMap.keySet().stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
         for (String key : collect) {

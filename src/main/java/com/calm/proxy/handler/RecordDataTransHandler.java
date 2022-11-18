@@ -10,6 +10,7 @@ import org.springframework.beans.factory.ObjectProvider;
 
 public class RecordDataTransHandler extends ResponseDataHandler {
     private final Channel clientChannel;
+
     public RecordDataTransHandler(ObjectProvider<HandlerRecode> handlerRecodes, Channel clientChannel) {
         super(handlerRecodes);
         this.clientChannel = clientChannel;
@@ -21,8 +22,8 @@ public class RecordDataTransHandler extends ResponseDataHandler {
             ReferenceCountUtil.release(msg);
             return;
         }
-        super.channelRead0(ctx,msg);
-        msg.headers().set(HttpHeaderNames.CONTENT_TYPE,"application/json");
+        super.channelRead0(ctx, msg);
+        msg.headers().set(HttpHeaderNames.CONTENT_TYPE, "application/json");
         msg.retain();
         clientChannel.writeAndFlush(msg);
     }

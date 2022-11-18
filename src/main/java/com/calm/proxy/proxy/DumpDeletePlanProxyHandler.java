@@ -32,16 +32,13 @@ public class DumpDeletePlanProxyHandler extends AbstractDumpProxyHandler impleme
     public boolean preHandler(ChannelHandlerContext ctx, FullHttpRequest request, HttpHeaders headers) {
         super.preHandler(ctx, request, headers);
         String uri = request.uri();
-        URI uriObj = URI.create(uri);
         String rawQuery = URI.create(uri).getRawQuery();
         Map<String, String> stringListMap1 = ProxyHandler.parseKV(rawQuery);
         String planId = stringListMap1.get("plan_id");
         Optional<UserPlanInfo> byOriginPlanId = userPlanInfoService.findByOriginPlanId(UID, planId);
         if (byOriginPlanId.isPresent()) {
             UserPlanInfo userPlanInfo = byOriginPlanId.get();
-            String newQuery = modifyKV(rawQuery, "plan_id", userPlanInfo.getPlanId());
-            uri = String.format("%s://%s%s?%s", uriObj.getScheme(), uriObj.getHost(), uriObj.getPath(), newQuery);
-            request.setUri(uri);
+            modifyRequestParameter(request,"plan_id",userPlanInfo.getPlanId());
             return true;
         }
         return false;

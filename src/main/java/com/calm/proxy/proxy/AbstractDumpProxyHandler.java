@@ -14,10 +14,8 @@ public abstract class AbstractDumpProxyHandler extends AbstractProxyHandler{
     public boolean preHandler(ChannelHandlerContext ctx, FullHttpRequest request, HttpHeaders headers) {
         String auth = headers.get(AUTH_HEADER);
         Map<String, String> stringListMap = ProxyHandler.parseKV(URLEncoder.encode(auth, StandardCharsets.UTF_8));
-
         ctx.channel().attr(ORIGIN_UID_KEY).set(stringListMap.get("u"));
-        String newAUth = modifyKV(auth, "u", UID);
-        headers.set(AUTH_HEADER, newAUth);
+       modifyUser(headers,  UID);
         ctx.channel().attr(UID_KEY).set(UID);
         return true;
     }
