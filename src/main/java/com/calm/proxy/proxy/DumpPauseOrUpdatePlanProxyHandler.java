@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Component
-public class DumpPausePlanProxyHandler extends AbstractDumpProxyHandler implements ProxyHandler {
+public class DumpPauseOrUpdatePlanProxyHandler extends AbstractDumpProxyHandler implements ProxyHandler {
     @Resource
     private UserPlanInfoService userPlanInfoService;
 
@@ -26,7 +26,10 @@ public class DumpPausePlanProxyHandler extends AbstractDumpProxyHandler implemen
         if (!StringUtils.hasText(path)) {
             return false;
         }
-        return path.contains("/plan") && path.contains("pause");
+        if (!path.contains("/plan")) {
+            return false;
+        }
+        return (path.contains("pause") || path.contains("update") || path.contains("switch"));
     }
 
     @Override
@@ -42,8 +45,6 @@ public class DumpPausePlanProxyHandler extends AbstractDumpProxyHandler implemen
             stringStringMap.put("plan_id", byOriginPlanId.get().getPlanId());
             String s1 = ProxyHandler.toString(stringStringMap);
             byte[] bytes = s1.getBytes(StandardCharsets.UTF_8);
-//            ByteBuf buf = ByteBufAllocator.DEFAULT.buffer(bytes.length);
-//            buf.writeBytes(bytes);
             request.content().clear();
             request.content().writeBytes(bytes);
             return true;
