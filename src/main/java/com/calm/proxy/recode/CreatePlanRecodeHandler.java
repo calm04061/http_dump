@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.List;
 import java.util.Map;
 
 @Component
@@ -36,9 +35,9 @@ public class CreatePlanRecodeHandler implements HandlerRecode {
             LOGGER.error("{}", jsonObject.getString("err_msg"));
             return;
         }
-        Map<String, List<String>> stringListMap = ProxyHandler.parseKV(response.getRequestBody());
-        String belongType = stringListMap.get("belong_type").get(0);
-        String belongId = stringListMap.get("belong_id").get(0);
+        Map<String, String> stringListMap = ProxyHandler.parseKV(response.getRequestBody());
+        String belongType = stringListMap.get("belong_type");
+        String belongId = stringListMap.get("belong_id");
         String planId = jsonObject.getJSONObject("data").getString("plan_id");
 
         userPlanInfoService.newPlan(response.getUid(), belongId, Long.parseLong(belongType),planId);

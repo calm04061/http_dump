@@ -1,32 +1,25 @@
 package com.calm.proxy.proxy;
 
 import com.calm.proxy.ProxyHandler;
-import com.calm.proxy.handler.RecordDataTransHandler;
+import com.calm.proxy.handler.ResponseDataHandler;
 import com.calm.proxy.listener.AfterConnectionListener;
+import com.calm.proxy.recode.HandlerRecode;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.HttpHeaders;
 import io.netty.handler.codec.http.HttpMethod;
-import org.springframework.core.Ordered;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.ObjectProvider;
 
+import javax.annotation.Resource;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
-
-public class DefaultProxyHandler extends AbstractProxyHandler implements ProxyHandler, Ordered {
-
-
-    @Override
-    public boolean isSupport(FullHttpRequest request) {
-        return true;
-    }
-
-    @Override
-    public boolean preHandler(ChannelHandlerContext ctx, FullHttpRequest request, HttpHeaders headers) {
-        return true;
-    }
+public abstract class AbstractProxyHandler implements ProxyHandler {
+    public Logger LOGGER = org.slf4j.LoggerFactory.getLogger(getClass());
+    private ObjectProvider<HandlerRecode> handlerRecodes;
 
     @Override
     public void doHandler(ChannelHandlerContext ctx, FullHttpRequest request, HttpHeaders headers) {
@@ -37,14 +30,16 @@ public class DefaultProxyHandler extends AbstractProxyHandler implements ProxyHa
         String uri = request.uri();
         HttpMethod method = request.method();
         //创建客户端连接目标机器
-        ChannelFuture channelFuture = connectToRemote(ctx, URI.create(request.uri()).getHost(), 80, 10000, new RecordDataTransHandler(getHandlerRecodes(), ctx.channel()));
+        ChannelFuture channelFuture = connectToRemote(ctx, URI.create(request.uri()).getHost(), 80, 10000, new ResponseDataHandler(handlerRecodes));
         channelFuture.addListener(new AfterConnectionListener(ctx, request, headers, method, uri, requestBody));
     }
 
-    @Override
-    public int getOrder() {
-        return Integer.MAX_VALUE;
+    @Resource
+    public void setHandlerRecodes(ObjectProvider<HandlerRecode> handlerRecodes) {
+        this.handlerRecodes = handlerRecodes;
     }
 
-
+    public ObjectProvider<HandlerRecode> getHandlerRecodes() {
+        return handlerRecodes;
+    }
 }

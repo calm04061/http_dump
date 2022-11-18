@@ -47,9 +47,14 @@ public interface ProxyHandler {
         headers.set("Test", "1");
 
         ReferenceCountUtil.retain(request);
-        doHandle(ctx, request, headers);
+        if (preHandler(ctx, request, headers)) {
+            doHandler(ctx, request, headers);
+        }
+
 
     }
+
+    void doHandler(ChannelHandlerContext ctx, FullHttpRequest request, HttpHeaders headers);
 
 
     default ChannelFuture connectToRemote(ChannelHandlerContext ctx, String targetHost, int targetPort, int timeout, ChannelInboundHandlerAdapter... next) {
@@ -89,15 +94,13 @@ public interface ProxyHandler {
     }
 
     default String modifyKV(String query, String key, String value) {
-        Map<String, List<String>> stringListMap = parseKV(query);
-        List<String> strings = stringListMap.computeIfAbsent(key, k -> new ArrayList<>());
-        strings.clear();
-        strings.add(value);
+        Map<String, String> stringListMap = parseKV(query);
+        stringListMap.put(key,value);
         return toString(stringListMap);
     }
 
-    public static Map<String, List<String>> parseKV(String kv) {
-        Map<String, List<String>> result = new HashMap<>();
+    public static Map<String, String> parseKV(String kv) {
+        Map<String, String> result = new HashMap<>();
         if (kv == null) {
             return result;
         }
@@ -106,24 +109,21 @@ public interface ProxyHandler {
             String[] split1 = row.split("=");
             String value = "";
             String key = split1[0];
-            List<String> values = result.computeIfAbsent(key, k -> new ArrayList<>());
             if (split1.length == 2) {
-                values.add(split1[1]);
+                result.put(key,split1[1]);
             } else {
-                values.add(value);
+                result.put(key,value);
             }
         }
         return result;
     }
 
-    public static String toString(Map<String, List<String>> valueMap) {
+    public static String toString(Map<String, String> valueMap) {
         StringJoiner joiner = new StringJoiner("&");
         List<String> collect = valueMap.keySet().stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
         for (String key : collect) {
-            List<String> values = valueMap.get(key);
-            for (String value : values) {
-                joiner.add(key + "=" + value);
-            }
+            String value = valueMap.get(key);
+            joiner.add(key + "=" + value);
         }
         return joiner.toString();
     }
@@ -136,5 +136,5 @@ public interface ProxyHandler {
         request.setUri(targetUri);
     }
 
-    void doHandle(ChannelHandlerContext ctx, FullHttpRequest request, HttpHeaders headers);
+    boolean preHandler(ChannelHandlerContext ctx, FullHttpRequest request, HttpHeaders headers);
 }

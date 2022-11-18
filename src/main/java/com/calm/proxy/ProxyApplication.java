@@ -4,6 +4,7 @@ package com.calm.proxy;
 import com.calm.proxy.handler.HttpProxyHandler;
 import com.calm.proxy.proxy.DefaultProxyHandler;
 import com.calm.proxy.proxy.DumpCreatePlanProxyHandler;
+import com.calm.proxy.proxy.DumpDeletePlanProxyHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -35,6 +36,10 @@ public class ProxyApplication implements CommandLineRunner {
     @Bean
     public DumpCreatePlanProxyHandler dumpProxyHandler() {
         return new DumpCreatePlanProxyHandler();
+    }
+    @Bean
+    public DumpDeletePlanProxyHandler deletePlanProxyHandler() {
+        return new DumpDeletePlanProxyHandler();
     }
 
     public static void main(String[] args) {

@@ -4,10 +4,20 @@ import io.netty.handler.codec.http.HttpMethod;
 
 public class Response {
     private String uid;
+    private String originUid;
     private String requestBody;
     private String responseBody;
     private String uri;
     private HttpMethod method;
+
+    public String getOriginUid() {
+        return originUid;
+    }
+
+    public void setOriginUid(String originUid) {
+        this.originUid = originUid;
+    }
+
     public String getUid() {
         return uid;
     }

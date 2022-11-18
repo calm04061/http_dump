@@ -13,6 +13,15 @@ public class UserPlanInfoService {
     @Resource
     private UserPlanInfoRepository userPlanInfoRepository;
 
+    public Optional<UserPlanInfo> findByOriginPlanId(String uid, String planId) {
+        Optional<UserPlanInfo> userPlanInfoByPlanId = userPlanInfoRepository.getUserPlanInfoByPlanId(planId);
+        if (userPlanInfoByPlanId.isPresent()) {
+            UserPlanInfo userPlanInfo = userPlanInfoByPlanId.get();
+            return userPlanInfoRepository.getUserPlanInfoByUidAndBelongIdAndBelongType(uid, userPlanInfo.getBelongId(), userPlanInfo.getBelongType());
+        }
+        return userPlanInfoByPlanId;
+    }
+
     public void newPlan(String uid, String belongId, Long belongType, String planId) {
         List<UserPlanInfo> userPlanInfoByUid = userPlanInfoRepository.getUserPlanInfoByUid(uid);
         for (UserPlanInfo userPlanInfo : userPlanInfoByUid) {
@@ -29,10 +38,15 @@ public class UserPlanInfoService {
             userPlanInfo.setBelongId(belongId);
             userPlanInfo.setBelongType(belongType);
             userPlanInfo.setPlanId(planId);
-        }else{
+        } else {
             userPlanInfo = userPlanInfoByUidAndBelongIdAndBelongType.get();
         }
         userPlanInfo.setStatus(3);
         userPlanInfoRepository.save(userPlanInfo);
+    }
+
+    public void delete(UserPlanInfo userPlanInfo) {
+        userPlanInfoRepository.delete(userPlanInfo);
+
     }
 }

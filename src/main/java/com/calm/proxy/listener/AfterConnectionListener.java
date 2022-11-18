@@ -14,12 +14,10 @@ import org.springframework.util.StringUtils;
 import java.net.URI;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import static com.calm.proxy.ProxyHandler.*;
-import static com.calm.proxy.ProxyHandler.UID_KEY;
 
 public class AfterConnectionListener implements ChannelFutureListener {
     Logger LOGGER = LoggerFactory.getLogger(AfterConnectionListener.class);
@@ -59,11 +57,8 @@ public class AfterConnectionListener implements ChannelFutureListener {
             String auth = request.headers().get(AUTH_HEADER);
             if (StringUtils.hasText(auth)) {
                 String decode = URLDecoder.decode(auth, StandardCharsets.UTF_8);
-                Map<String, List<String>> stringListMap = ProxyHandler.parseKV(decode);
-                List<String> u = stringListMap.get("u");
-                if (u != null && !u.isEmpty()) {
-                    channel.attr(UID_KEY).set(u.get(0));
-                }
+                Map<String, String> stringListMap = ProxyHandler.parseKV(decode);
+                channel.attr(UID_KEY).set(stringListMap.get("u"));
             }
             URI uri1 = URI.create(uri);
             String rawQuery = Optional.of(uri1).map(URI::getRawQuery).map(e -> "?" + e).orElse("");

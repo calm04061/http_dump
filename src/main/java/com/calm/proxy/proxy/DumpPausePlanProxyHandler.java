@@ -7,7 +7,7 @@ import org.springframework.util.StringUtils;
 import java.net.URI;
 
 
-public class DumpCreatePlanProxyHandler extends AbstractDumpProxyHandler implements ProxyHandler {
+public class DumpPausePlanProxyHandler extends AbstractDumpProxyHandler  implements ProxyHandler {
 
     @Override
     public boolean isSupport(FullHttpRequest request) {
@@ -15,7 +15,7 @@ public class DumpCreatePlanProxyHandler extends AbstractDumpProxyHandler impleme
         if (!StringUtils.hasText(path)) {
             return false;
         }
-        return path.contains("/plan") && path.contains("create");
+        return path.contains("/plan") && path.contains("pause");
     }
 
 }

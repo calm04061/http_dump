@@ -2,8 +2,6 @@ package com.calm.proxy.handler;
 
 import com.calm.proxy.recode.HandlerRecode;
 import com.calm.proxy.recode.Response;
-import io.netty.buffer.ByteBuf;
-import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.FullHttpResponse;
@@ -17,10 +15,10 @@ import java.util.stream.Collectors;
 import static com.calm.proxy.ProxyHandler.*;
 import static com.calm.proxy.ProxyHandler.REQUEST_METHOD_KEY;
 
-public class DumpCreatePlanHandler extends SimpleChannelInboundHandler<FullHttpResponse> {
+public class ResponseDataHandler extends SimpleChannelInboundHandler<FullHttpResponse> {
     private final ObjectProvider<HandlerRecode> handlerRecodes;
 
-    public DumpCreatePlanHandler(ObjectProvider<HandlerRecode> handlerRecodes) {
+    public ResponseDataHandler(ObjectProvider<HandlerRecode> handlerRecodes) {
         this.handlerRecodes = handlerRecodes;
     }
 
@@ -45,6 +43,5 @@ public class DumpCreatePlanHandler extends SimpleChannelInboundHandler<FullHttpR
                 handlerRecode.handle(response);
             }
         }
-
     }
 }
