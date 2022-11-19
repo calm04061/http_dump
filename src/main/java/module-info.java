@@ -6,12 +6,15 @@ module com.calm.proxy {
     requires org.slf4j;
     requires spring.beans;
     requires java.annotation;
+    requires java.sql;
+    requires java.instrument;
     requires io.netty.common;
     requires spring.core;
     requires spring.boot;
     requires spring.boot.autoconfigure;
     requires spring.context;
     requires spring.data.jpa;
+    requires spring.data.commons;
     requires java.persistence;
     requires org.hibernate.orm.core;
     requires com.fasterxml.jackson.databind;

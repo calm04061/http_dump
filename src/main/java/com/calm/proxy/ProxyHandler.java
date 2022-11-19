@@ -56,7 +56,19 @@ public interface ProxyHandler {
     void doHandler(ChannelHandlerContext ctx, FullHttpRequest request, HttpHeaders headers);
 
 
-    default ChannelFuture connectToRemote(ChannelHandlerContext ctx, String targetHost, int targetPort, int timeout, ChannelInboundHandlerAdapter... next) {
+    default ChannelFuture connectToRemote(ChannelHandlerContext ctx, FullHttpRequest request, int timeout, ChannelInboundHandlerAdapter... next) {
+        URI uri = URI.create(request.uri());
+        int targetPort = uri.getPort();
+        if (targetPort == -1) {
+            String scheme = uri.getScheme().toLowerCase();
+            if (scheme.equals("http")) {
+                targetPort = 80;
+            } else if (scheme.equals("https")) {
+                targetPort = 443;
+            } else {
+                throw new UnsupportedOperationException("位置scheme:" + scheme);
+            }
+        }
         return new Bootstrap().group(ctx.channel().eventLoop()).channel(NioSocketChannel.class).option(ChannelOption.CONNECT_TIMEOUT_MILLIS, timeout).handler(new ChannelInitializer<SocketChannel>() {
             @Override
             protected void initChannel(SocketChannel socketChannel) {
@@ -75,7 +87,7 @@ public interface ProxyHandler {
                     pipeline.addLast(adapter);
                 }
             }
-        }).connect(targetHost, targetPort);
+        }).connect(uri.getHost(), targetPort);
     }
 
     static DefaultFullHttpResponse getResponse(HttpResponseStatus statusCode, String message) {
@@ -94,7 +106,7 @@ public interface ProxyHandler {
 
     default String modifyKV(String query, String key, String value) {
         Map<String, String> stringListMap = parseKV(query);
-        stringListMap.put(key,value);
+        stringListMap.put(key, value);
         return toString(stringListMap);
     }
 
@@ -109,9 +121,9 @@ public interface ProxyHandler {
             String value = "";
             String key = split1[0];
             if (split1.length == 2) {
-                result.put(key,split1[1]);
+                result.put(key, split1[1]);
             } else {
-                result.put(key,value);
+                result.put(key, value);
             }
         }
         return result;

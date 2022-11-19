@@ -14,7 +14,6 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.ObjectProvider;
 
 import javax.annotation.Resource;
-import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
 public abstract class AbstractProxyHandler implements ProxyHandler {
@@ -30,7 +29,7 @@ public abstract class AbstractProxyHandler implements ProxyHandler {
         String uri = request.uri();
         HttpMethod method = request.method();
         //创建客户端连接目标机器
-        ChannelFuture channelFuture = connectToRemote(ctx, URI.create(request.uri()).getHost(), 80, 10000, new ResponseDataHandler(handlerRecodes));
+        ChannelFuture channelFuture = connectToRemote(ctx, request, 10000, new ResponseDataHandler(handlerRecodes));
         channelFuture.addListener(new AfterConnectionListener(ctx, request, headers, method, uri, requestBody));
     }
 

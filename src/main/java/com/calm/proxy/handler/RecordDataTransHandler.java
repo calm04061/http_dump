@@ -23,7 +23,7 @@ public class RecordDataTransHandler extends ResponseDataHandler {
             return;
         }
         super.channelRead0(ctx, msg);
-        msg.headers().set(HttpHeaderNames.CONTENT_TYPE, "application/json");
+        msg.headers().set(HttpHeaderNames.CONTENT_TYPE, "application/json;charset=UTF-8");
         msg.retain();
         clientChannel.writeAndFlush(msg);
     }
